@@ -31,6 +31,7 @@ public class LineEntity: Entity {
         self.components[ModelComponent.self] = ModelComponent(mesh: mesh, materials: [material])
 
         self.position = (endPos - startPos) / 2.0
+        print(self.position)
         self.look(at: endPos, from: startPos, relativeTo: nil)
     }
     
