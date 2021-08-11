@@ -20,19 +20,28 @@ public class LineEntity: Entity {
     var color: LineEntityColor
     
     private func setLine() {
-        let length = length(endPos - startPos)
-        let mesh = MeshResource.generateBox(size: SIMD3<Float>(0.0001, length, 0.0001), cornerRadius: 0.0)
         
-        
+        let anchor = AnchorEntity()
+        let midPoint = (endPos + startPos) / 2.0
+        anchor.position = midPoint
+        anchor.look(at: startPos, from: midPoint, relativeTo: nil)
+          
+        let dist = simd_distance(startPos, endPos)
+          
         var material = PhysicallyBasedMaterial()
         material.emissiveIntensity = 10000.0
         material.emissiveColor = PhysicallyBasedMaterial.EmissiveColor(color: color)
-        
-        self.components[ModelComponent.self] = ModelComponent(mesh: mesh, materials: [material])
 
-        self.position = (endPos + startPos) / 2.0
-        print(self.position)
-        self.look(at: endPos, from: (endPos + startPos) / 2.0, relativeTo: nil)
+        let mesh = MeshResource.generateBox(width:0.025,
+                                                        height: 0.025/2.5,
+                                                        depth: dist)
+          
+        let entity = ModelEntity(mesh: mesh,
+                                             materials: [material])
+          
+        entity.position = .init(0, 0.025, 0)
+        anchor.addChild(entity)
+        self.addChild(anchor)
     }
     
     public required init(from startP: SIMD3<Float>, to endP: SIMD3<Float>, withColor: LineEntityColor = .green) {
