@@ -24,7 +24,15 @@ public class LineEntity: Entity {
         let anchor = AnchorEntity()
         let midPoint = (endPos + startPos) / 2.0
         anchor.position = midPoint
-        anchor.look(at: endPos, from: midPoint, relativeTo: nil)
+        
+        let dir1 = normalize(endPos - startPos)
+        let cosT = abs(dot(dir1, SIMD3<Float>(0,1,0)))
+        if (cosT < 0.999) {
+            anchor.look(at: endPos, from: midPoint, relativeTo: nil)
+        } else {
+            print("HERE")
+            anchor.position = midPoint
+        }
           
         let dist = simd_distance(startPos, endPos)
           
