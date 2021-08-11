@@ -15,11 +15,26 @@ public typealias LineEntityColor = UIColor
 #endif
 
 public class LineEntity: Entity {
-    public var startPos: SIMD3<Float>
-    public var endPos: SIMD3<Float>
-    var color: LineEntityColor
+    public var startPos: SIMD3<Float> {
+        didSet {
+            setLine()
+        }
+    }
+    public var endPos: SIMD3<Float> {
+        didSet {
+            setLine()
+        }
+    }
+    public var color: LineEntityColor {
+        didSet {
+            setLine()
+        }
+    }
     
     private func setLine() {
+        if !children.isEmpty {
+            children.removeAll()
+        }
         
         let anchor = AnchorEntity()
         let midPoint = (endPos + startPos) / 2.0
@@ -28,11 +43,9 @@ public class LineEntity: Entity {
         let dir1 = normalize(endPos - startPos)
         let cosT = abs(dot(dir1, SIMD3<Float>(0,1,0)))
         
-        print("cosT = \(cosT)")
         if (cosT < 0.9999) {
             anchor.look(at: endPos, from: midPoint, relativeTo: nil)
         } else {
-            print("HERE")
             anchor.transform = Transform(pitch: Float.pi / 2.0, yaw: 0.0, roll: 0.0)
             anchor.position = midPoint
         }
