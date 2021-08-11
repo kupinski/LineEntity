@@ -30,9 +30,9 @@ public class LineEntity: Entity {
         
         self.components[ModelComponent.self] = ModelComponent(mesh: mesh, materials: [material])
 
-        self.position = (endPos - startPos) / 2.0
+        self.position = (endPos + startPos) / 2.0
         print(self.position)
-        self.look(at: endPos, from: self.position, relativeTo: nil)
+        self.look(at: endPos, from: (endPos + startPos) / 2.0, relativeTo: nil)
     }
     
     public required init(from startP: SIMD3<Float>, to endP: SIMD3<Float>, withColor: LineEntityColor = .green) {
@@ -41,6 +41,8 @@ public class LineEntity: Entity {
         self.color = withColor
         
         super.init()
+        
+        
         
         setLine()
 
