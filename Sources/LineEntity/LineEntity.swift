@@ -29,7 +29,7 @@ public class LineEntity: Entity {
         let cosT = abs(dot(dir1, SIMD3<Float>(0,1,0)))
         
         print("cosT = \(cosT)")
-        if (cosT < 0.999) {
+        if (cosT < 0.9999) {
             anchor.look(at: endPos, from: midPoint, relativeTo: nil)
         } else {
             print("HERE")
