@@ -32,14 +32,12 @@ public class LineEntity: Entity {
         material.emissiveIntensity = 10000.0
         material.emissiveColor = PhysicallyBasedMaterial.EmissiveColor(color: color)
 
-        let mesh = MeshResource.generateBox(width:0.025,
-                                                        height: 0.025/2.5,
-                                                        depth: dist)
+        let mesh = MeshResource.generateBox(width:0.0002,
+                                            height: 0.0002,
+                                            depth: dist)
           
-        let entity = ModelEntity(mesh: mesh,
-                                             materials: [material])
+        let entity = ModelEntity(mesh: mesh, materials: [material])
           
-        entity.position = .init(0, 0.025, 0)
         anchor.addChild(entity)
         self.addChild(anchor)
     }
