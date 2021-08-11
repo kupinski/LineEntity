@@ -32,7 +32,7 @@ public class LineEntity: Entity {
 
         self.position = (endPos - startPos) / 2.0
         print(self.position)
-        self.look(at: endPos, from: startPos, relativeTo: nil)
+        self.look(at: endPos, from: self.position, relativeTo: nil)
     }
     
     public required init(from startP: SIMD3<Float>, to endP: SIMD3<Float>, withColor: LineEntityColor = .green) {
