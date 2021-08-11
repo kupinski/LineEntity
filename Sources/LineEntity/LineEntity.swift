@@ -33,6 +33,7 @@ public class LineEntity: Entity {
             anchor.look(at: endPos, from: midPoint, relativeTo: nil)
         } else {
             print("HERE")
+            anchor.transform = Transform(pitch: Float.pi / 2.0, yaw: 0.0, roll: 0.0)
             anchor.position = midPoint
         }
           
