@@ -35,22 +35,25 @@ public class LineEntity: Entity {
         if !children.isEmpty {
             children.removeAll()
         }
+        let tmpEndPos = convert(position: endPos, from: nil)
+        let tmpStartPos = convert(position: startPos, from: nil)
+
         
         let anchor = AnchorEntity()
-        let midPoint = (endPos + startPos) / 2.0
+        let midPoint = (tmpEndPos + tmpStartPos) / 2.0
         anchor.position = midPoint
         
-        let dir1 = normalize(endPos - startPos)
+        let dir1 = normalize(tmpEndPos - tmpStartPos)
         let cosT = abs(dot(dir1, SIMD3<Float>(0,1,0)))
         
         if (cosT < 0.9999) {
-            anchor.look(at: endPos, from: midPoint, relativeTo: nil)
+            anchor.look(at: tmpEndPos, from: midPoint, relativeTo: nil)
         } else {
             anchor.transform = Transform(pitch: Float.pi / 2.0, yaw: 0.0, roll: 0.0)
             anchor.position = midPoint
         }
           
-        let dist = simd_distance(startPos, endPos)
+        let dist = simd_distance(tmpStartPos, tmpEndPos)
           
         var material = PhysicallyBasedMaterial()
         material.emissiveIntensity = 10000.0
