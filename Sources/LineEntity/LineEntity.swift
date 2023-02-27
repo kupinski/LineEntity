@@ -36,7 +36,7 @@ public class LineEntity: Entity {
             children.removeAll()
         }
         
-        let anchor = AnchorEntity()
+        let anchor = Entity()
         let midPoint = (endPos + startPos) / 2.0
         anchor.position = midPoint
         
