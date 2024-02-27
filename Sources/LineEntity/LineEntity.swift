@@ -31,6 +31,12 @@ public class LineEntity: Entity {
         }
     }
     
+    public var scaleThickness: Float {
+        didSet {
+            setLine()
+        }
+    }
+    
     private func setLine() {
         if !children.isEmpty {
             children.removeAll()
@@ -56,8 +62,8 @@ public class LineEntity: Entity {
         material.emissiveIntensity = 10000.0
         material.emissiveColor = PhysicallyBasedMaterial.EmissiveColor(color: color)
 
-        let mesh = MeshResource.generateBox(width:0.0002,
-                                            height: 0.0002,
+        let mesh = MeshResource.generateBox(width:0.0002 * scaleThickness,
+                                            height: 0.0002 * scaleThickness,
                                             depth: dist)
           
         let entity = ModelEntity(mesh: mesh, materials: [material])
@@ -66,10 +72,11 @@ public class LineEntity: Entity {
         self.addChild(anchor)
     }
     
-    public required init(from startP: SIMD3<Float>, to endP: SIMD3<Float>, withColor: LineEntityColor = .green) {
+    public required init(from startP: SIMD3<Float>, to endP: SIMD3<Float>, withColor: LineEntityColor = .green, scaleThickness: Float = 1.0) {
         self.startPos = startP
         self.endPos = endP
         self.color = withColor
+        self.scaleThickness = scaleThickness
         
         super.init()
         
