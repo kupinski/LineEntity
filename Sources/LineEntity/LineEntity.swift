@@ -58,10 +58,7 @@ public class LineEntity: Entity {
           
         let dist = simd_distance(startPos, endPos)
           
-        var material = PhysicallyBasedMaterial()
-        material.emissiveIntensity = 10000.0
-        material.emissiveColor = PhysicallyBasedMaterial.EmissiveColor(color: color)
-
+        let material = SimpleMaterial(color: color, isMetallic: true)
         let mesh = MeshResource.generateBox(width:0.0002 * scaleThickness,
                                             height: 0.0002 * scaleThickness,
                                             depth: dist)
