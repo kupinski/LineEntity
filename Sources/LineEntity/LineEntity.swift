@@ -57,7 +57,7 @@ public class LineEntity: Entity {
         }
           
         let dist = simd_distance(startPos, endPos)
-          
+
         let material = SimpleMaterial(color: color, isMetallic: true)
         let mesh = MeshResource.generateBox(width:0.0002 * scaleThickness,
                                             height: 0.0002 * scaleThickness,
